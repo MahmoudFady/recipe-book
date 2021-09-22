@@ -1,0 +1,24 @@
+.recipe-item {
+  margin: 25px auto;
+  box-shadow: 1px 1px 3px #ccc, -1px -1px 3px #ccc;
+  display: flex;
+  flex-flow: row nowrap;
+  height: 120px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.recipe-info {
+  padding: 10px;
+  width: 70%;
+  cursor: pointer;
+}
+.recipe-img {
+  width: 30%;
+  height: 100%;
+  justify-self: flex-end;
+  background-color: #f00;
+}
+.recipe-img > img {
+  height: 100%;
+  width: 100%;
+}

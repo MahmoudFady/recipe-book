@@ -1,0 +1,9 @@
+.row {
+  margin: 10px auto;
+}
+.row > div {
+  margin-bottom: 10px;
+}
+.row > div > button {
+  margin-right: 10px;
+}

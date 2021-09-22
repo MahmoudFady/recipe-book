@@ -1,0 +1,8 @@
+img {
+  width: 50%;
+  height: 225px;
+  border-radius: 5px;
+}
+.row > div {
+  margin-bottom: 10px;
+}

@@ -3,8 +3,15 @@
   padding: 0px;
   margin: 0px;
   box-sizing: border-box;
+  text-transform: capitalize;
+  font-family: Tahoma;
 }
-a {
+a,
+a:hover {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
+}
+button {
+  border-radius: 4px !important;
 }

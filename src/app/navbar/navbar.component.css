@@ -1,0 +1,7 @@
+nav {
+  margin-bottom: 50px;
+}
+nav button.navbar-toggler {
+  border: none;
+  outline: none;
+}

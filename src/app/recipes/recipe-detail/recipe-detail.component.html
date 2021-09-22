@@ -1,0 +1,28 @@
+<div class="row" *ngIf="recipe.name">
+  <div class="col-xs-12 recipe-img">
+    <img [src]="recipe.imagePath" alt="" />
+  </div>
+  <div class="col-xs-12 recipe-name">
+    <h2>{{ recipe.name }}</h2>
+  </div>
+  <div class="col-xs-12">
+    <button class="btn btn-primary dropdown-toggle">
+      manage recipe
+      <ul class="dropdown-menu">
+        <li class="dropdown-item"><a href="#">to cart</a></li>
+        <li class="dropdown-item"><a href="#">edit</a></li>
+      </ul>
+    </button>
+  </div>
+  <div class="col-xs-12 recipe-description">
+    <p>{{ recipe.description }}</p>
+  </div>
+  <div class="col-xs-12 recipe-ingrediant">
+    <p>recipe ingrediants</p>
+  </div>
+</div>
+<div *ngIf="!recipe.name" class="row">
+  <div class="col-xs-12">
+    <h4>select recipe</h4>
+  </div>
+</div>
