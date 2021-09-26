@@ -1,8 +1,19 @@
-img {
-  width: 50%;
+.recipe-img {
+  padding: 0px !important;
+  width: 75%;
   height: 225px;
   border-radius: 5px;
+  overflow: hidden;
+}
+img {
+  height: 100%;
+  width: 100%;
 }
 .row > div {
   margin-bottom: 10px;
+}
+@media (max-width: 768px) {
+  .recipe-img {
+    width: 100% !important;
+  }
 }

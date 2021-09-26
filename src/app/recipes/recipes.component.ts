@@ -1,3 +1,4 @@
+import { DataStorageService } from './../shared/data-storage.service';
 import { Recipe } from './../shared/recipe.model';
 import { Component, OnInit } from '@angular/core';
 
@@ -7,15 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./recipes.component.css'],
 })
 export class RecipesComponent implements OnInit {
-  viewRecipe: Recipe = {
-    name: '',
-    description: '',
-    imagePath: '',
-  };
-  constructor() {}
+  constructor(private dataStorageSer: DataStorageService) {}
 
   ngOnInit(): void {}
-  viewRecipeDetail(recipe: Recipe) {
-    this.viewRecipe = recipe;
-  }
 }

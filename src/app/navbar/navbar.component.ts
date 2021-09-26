@@ -1,11 +1,5 @@
-import {
-  Component,
-  ElementRef,
-  EventEmitter,
-  OnInit,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { AuthService } from './../auth/auth.service';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -16,16 +10,22 @@ export class NavbarComponent implements OnInit {
   @ViewChild('navbarCollapse')
   navbarCollapse!: ElementRef;
   opened = false;
-  @Output() selectedFeature = new EventEmitter<string>();
-  constructor() {}
+  isAuthenticated = false;
+  constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {}
-  onSelect(feature: string) {
-    this.selectedFeature.emit(feature);
+  ngOnInit(): void {
+    this.authService.autoLogin();
+    this.authService.user.subscribe((user) => {
+      this.isAuthenticated = user ? true : false;
+    });
   }
+
   onToggleNavbar() {
     const collapseEle = this.navbarCollapse.nativeElement;
     collapseEle.style.display = this.opened ? 'none' : 'block';
     this.opened = !this.opened;
+  }
+  onLogout() {
+    this.authService.logout();
   }
 }

@@ -7,10 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./recipe-item.component.css'],
 })
 export class RecipeItemComponent implements OnInit {
+  @Input() index = 0;
   @Input() recipe: Recipe = {
     name: '',
     description: '',
     imagePath: '',
+    ingredients: [],
   };
   constructor() {}
 

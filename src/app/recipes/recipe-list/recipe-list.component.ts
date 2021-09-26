@@ -1,3 +1,4 @@
+import { DataStorageService } from './../../shared/data-storage.service';
 import { RecipeServie } from './../recipe.service';
 import { Recipe } from './../../shared/recipe.model';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
@@ -8,15 +9,17 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./recipe-list.component.css'],
 })
 export class RecipeListComponent implements OnInit {
-  @Output() recipeSrc = new EventEmitter<Recipe>();
   recipes: Recipe[] = [];
-  constructor(private recipeService: RecipeServie) {}
-
+  constructor(
+    private recipeService: RecipeServie,
+    private dataStorageSer: DataStorageService
+  ) {}
   ngOnInit(): void {
-    this.recipes = this.recipeService.getRecipes();
-  }
-
-  getRecipeDetail(recipe: Recipe) {
-    this.recipeSrc.emit(recipe);
+    this.dataStorageSer.fetchRecipes().subscribe((recipes) => {
+      console.log(recipes);
+    });
+    this.recipeService.getUpdatedRecipe().subscribe((recipes) => {
+      this.recipes = recipes;
+    });
   }
 }

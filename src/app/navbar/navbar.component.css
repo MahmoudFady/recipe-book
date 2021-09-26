@@ -1,7 +1,22 @@
 nav {
   margin-bottom: 50px;
 }
+nav .navbar-brand {
+  font-weight: bold;
+}
 nav button.navbar-toggler {
   border: none;
   outline: none;
+}
+li {
+  margin-right: 10px;
+}
+li a {
+  padding-left: 10px;
+  font-weight: bold;
+  font-size: 14px;
+}
+li a.active {
+  background: #ccc;
+  color: #000;
 }

@@ -1,5 +1,8 @@
+import { RecipeServie } from './../recipe.service';
 import { Recipe } from './../../shared/recipe.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -7,12 +10,36 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./recipe-detail.component.css'],
 })
 export class RecipeDetailComponent implements OnInit {
-  @Input() recipe: Recipe = {
+  private opened = false;
+  recipeIndex = 0;
+  recipe: Recipe = {
     name: '',
     description: '',
     imagePath: '',
+    ingredients: [],
   };
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private recipeService: RecipeServie,
+    private dataStroageSer: DataStorageService
+  ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.route.params.subscribe((params: Params) => {
+      this.recipeIndex = +params['id'];
+      const recipeSrc = this.recipeService.getRecipeByIndex(this.recipeIndex);
+      this.recipe = recipeSrc ? recipeSrc : this.recipe;
+      console.log('recipe detail', this.recipe);
+    });
+  }
+  onToggle(dropDownMenu: HTMLUListElement) {
+    dropDownMenu.style.display = this.opened ? 'none' : 'block';
+    this.opened = !this.opened;
+  }
+  onDeleteRecipe(index: number) {
+    this.recipeService.deleteRecipeByIndex(index);
+    this.dataStroageSer.updateRecipes();
+    this.router.navigate(['../'], { relativeTo: this.route });
+  }
 }

@@ -1,4 +1,8 @@
-<a class="recipe-item">
+<a
+  [routerLink]="['/recipes', index]"
+  routerLinkActive="active"
+  class="recipe-item"
+>
   <div class="recipe-info">
     <h4>{{ recipe.name }}</h4>
     <p>{{ recipe.description }}</p>

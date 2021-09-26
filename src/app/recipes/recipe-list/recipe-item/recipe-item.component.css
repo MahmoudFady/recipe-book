@@ -1,9 +1,12 @@
+a.active {
+  background-color: #ddd !important;
+}
 .recipe-item {
   margin: 25px auto;
   box-shadow: 1px 1px 3px #ccc, -1px -1px 3px #ccc;
   display: flex;
   flex-flow: row nowrap;
-  height: 120px;
+  height: 100px;
   border-radius: 5px;
   overflow: hidden;
 }

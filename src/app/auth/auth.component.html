@@ -1,0 +1,55 @@
+<div class="row flex-column align-items-center">
+  <div *ngIf="authError" class="col-xs-12 col-sm-8 col-md-6">
+    <div class="alert alert-danger">
+      {{ authError }}
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+      <div class="row flex-column align-items-center">
+        <div class="col-xs-12 col-sm-8 col-md-6 form-group">
+          <label for="">email</label>
+          <input
+            type="email"
+            class="form-control"
+            required
+            email
+            name="email"
+            ngModel
+          />
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-6 form-group">
+          <label for="">password</label>
+          <input
+            type="password"
+            class="form-control"
+            required
+            name="password"
+            minlength="6"
+            ngModel
+          />
+        </div>
+        <div class="col-xs-12 col-sm-8 col-md-6 form-group">
+          <button
+            [disabled]="authForm.invalid"
+            class="btn btn-primary"
+            type="submit"
+          >
+            <span *ngIf="!isLoading">
+              {{ signinMode ? "signin" : "signup" }}
+            </span>
+            <app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+          </button>
+          ||
+          <button
+            class="btn btn-light"
+            type="button"
+            (click)="onSwitchAuthMode()"
+          >
+            swich to {{ signinMode ? "signup" : "signin" }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

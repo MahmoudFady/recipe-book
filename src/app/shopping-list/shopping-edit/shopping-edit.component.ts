@@ -1,12 +1,7 @@
+import { ShoppingListServie } from './../shopping-list.service';
 import { Ingredient } from './../../shared/ingredient.model';
-import {
-  Component,
-  ElementRef,
-  OnInit,
-  Output,
-  ViewChild,
-  EventEmitter,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -14,18 +9,51 @@ import {
   styleUrls: ['./shopping-edit.component.css'],
 })
 export class ShoppingEditComponent implements OnInit {
-  @Output() newIngredientSrc = new EventEmitter<Ingredient>();
-  @ViewChild('recipeName')
-  recipeNameEle!: ElementRef;
-  @ViewChild('recipeAmount')
-  recipeAmountEle!: ElementRef;
-  constructor() {}
+  editingMode = false;
+  btnContext = '+ add';
+  ingredientIndex = 0;
+  @ViewChild('f') ingredientForm!: NgForm;
+  constructor(private shoppingListService: ShoppingListServie) {}
 
-  ngOnInit(): void {}
-  onAddIngredient() {
-    const name = this.recipeNameEle.nativeElement.value;
-    const amount = this.recipeAmountEle.nativeElement.value;
+  ngOnInit(): void {
+    this.shoppingListService.getIngredintToEdit().subscribe((resualt) => {
+      const { name, amount } = resualt.ingredient;
+      this.ingredientForm.setValue({
+        name,
+        amount,
+      });
+      this.ingredientIndex = resualt.index;
+      this.editingMode = true;
+      this.changeMode();
+    });
+  }
+  onAddIngredient(f: NgForm) {
+    const { name, amount } = f.value;
     const newIngredient = new Ingredient(name, amount);
-    this.newIngredientSrc.emit(newIngredient);
+    if (!this.editingMode) {
+      this.shoppingListService.addInredient(newIngredient);
+    } else {
+      this.shoppingListService.updateIngredientByIndex(this.ingredientIndex, {
+        name,
+        amount,
+      });
+    }
+    this.editingMode = false;
+    f.reset();
+    this.changeMode();
+  }
+  onDeleteIngredient() {
+    this.shoppingListService.deleteIngredientByIndex(this.ingredientIndex);
+    this.editingMode = false;
+    this.ingredientForm.reset();
+    this.changeMode();
+  }
+  onCancel() {
+    this.ingredientForm.reset();
+    this.editingMode = false;
+    this.changeMode();
+  }
+  changeMode() {
+    this.btnContext = this.editingMode ? 'edit' : '+ add';
   }
 }
