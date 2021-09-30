@@ -16,10 +16,10 @@
       <ul #dropDownMenu class="dropdown-menu">
         <li class="dropdown-item"><a href="#">to cart</a></li>
         <li class="dropdown-item">
-          <a [routerLink]="['../edit', recipeIndex]">edit</a>
+          <a [routerLink]="['edit']" routerLinkActive="active">edit</a>
         </li>
         <li class="dropdown-item">
-          <a (click)="onDeleteRecipe(recipeIndex)">delete</a>
+          <a (click)="onDisplayModal()">delete</a>
         </li>
       </ul>
     </button>
@@ -44,3 +44,4 @@
     </ul>
   </div>
 </div>
+<app-modal *ngIf="displayModal"></app-modal>

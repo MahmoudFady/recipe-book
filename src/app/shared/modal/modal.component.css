@@ -1,0 +1,25 @@
+.box {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+  text-align: center;
+  color: #000;
+}
+.row {
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+.row > div {
+  width: 370px;
+  padding: 25px;
+  background-color: #ffff;
+  border-radius: 10px;
+}
+button {
+  margin-right: 10px;
+}

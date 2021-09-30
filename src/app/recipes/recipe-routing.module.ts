@@ -5,22 +5,30 @@ import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';
 import { RecipesResolverService } from './recipes-resolver.service';
 import { RecipesComponent } from './recipes.component';
+import { CanDeactivateGuard } from '../shared/can-deactivate-guard.service';
 const router: Routes = [
   {
     path: '',
     component: RecipesComponent,
+    resolve: [RecipesResolverService],
+
     children: [
       {
         path: '',
         component: RecipeStartComponent,
-        resolve: [RecipesResolverService],
       },
-      { path: 'new', component: RecipeEditComponent },
-      { path: 'edit/:id', component: RecipeEditComponent },
+      {
+        path: 'new',
+        component: RecipeEditComponent,
+      },
+      {
+        path: ':id/edit',
+        canDeactivate: [CanDeactivateGuard],
+        component: RecipeEditComponent,
+      },
       {
         path: ':id',
         component: RecipeDetailComponent,
-        resolve: [RecipesResolverService],
       },
     ],
   },

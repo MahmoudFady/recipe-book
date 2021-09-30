@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { RecipeRoutingModules } from './recipe-routing.module';
 import { RecipeStartComponent } from './recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipe-edit/recipe-edit.component';
@@ -18,6 +19,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     RecipeEditComponent,
     RecipeStartComponent,
   ],
-  imports: [CommonModule, ReactiveFormsModule, RecipeRoutingModules],
+  imports: [SharedModule, ReactiveFormsModule, RecipeRoutingModules],
 })
 export class RecipeModule {}

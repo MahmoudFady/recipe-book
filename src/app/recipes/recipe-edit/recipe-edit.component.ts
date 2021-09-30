@@ -1,3 +1,4 @@
+import { CanDeactivate } from '@angular/router';
 import { RecipeServie } from './../recipe.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
@@ -39,6 +40,7 @@ export class RecipeEditComponent implements OnInit {
       this.editingMode = recipeIndex ? true : false;
       if (this.editingMode) {
         this.recipe = this.recipeService.getRecipeByIndex(+recipeIndex);
+        console.log(this.recipeId);
         this.recipeId = +recipeIndex;
         this.initRecipeForm();
       }
@@ -58,11 +60,16 @@ export class RecipeEditComponent implements OnInit {
         );
       }
     }
-    this.recipeForm = new FormGroup({
-      name: new FormControl(name, [Validators.required]),
-      imagePath: new FormControl(imagePath, [Validators.required]),
-      description: new FormControl(description, [Validators.required]),
-      ingredients: ingredients,
+    // this.recipeForm = new FormGroup({
+    //   name: new FormControl(name, [Validators.required]),
+    //   imagePath: new FormControl(imagePath, [Validators.required]),
+    //   description: new FormControl(description, [Validators.required]),
+    //   ingredients: ingredients,
+    // });
+    this.recipeForm.patchValue({
+      name,
+      imagePath,
+      description,
     });
   }
   onAddNewIngredientCtrl() {
@@ -90,5 +97,8 @@ export class RecipeEditComponent implements OnInit {
     }
     this.dataStorageSer.updateRecipes();
     this.onCancel();
+  }
+  CanDeactivate() {
+    return true;
   }
 }

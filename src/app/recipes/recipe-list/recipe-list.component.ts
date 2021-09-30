@@ -10,14 +10,20 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class RecipeListComponent implements OnInit {
   recipes: Recipe[] = [];
+  isLoading = false;
   constructor(
     private recipeService: RecipeServie,
     private dataStorageSer: DataStorageService
   ) {}
   ngOnInit(): void {
-    this.dataStorageSer.fetchRecipes().subscribe((recipes) => {
-      console.log(recipes);
-    });
+    this.isLoading = true;
+    this.dataStorageSer.fetchRecipes().subscribe(
+      (recipes) => {
+        this.isLoading = false;
+      },
+      (err) => {},
+      () => {}
+    );
     this.recipeService.getUpdatedRecipe().subscribe((recipes) => {
       this.recipes = recipes;
     });

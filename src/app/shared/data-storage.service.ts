@@ -14,16 +14,14 @@ export class DataStorageService {
   ) {}
   updateRecipes() {
     const recipes = this.recipeService.getRecipes();
-    this.http.put(this.url + 'recipes.json', recipes).subscribe((response) => {
-      console.log(response);
-    });
+    this.http
+      .put(this.url + 'recipes.json', recipes)
+      .subscribe((response) => {});
   }
   storeRecipe(recipe: Recipe) {
     this.http
       .post<Recipe[]>(this.url + 'recipes.json', recipe)
-      .subscribe((response) => {
-        console.log(response);
-      });
+      .subscribe((response) => {});
   }
   fetchRecipes() {
     return this.authService.user.pipe(

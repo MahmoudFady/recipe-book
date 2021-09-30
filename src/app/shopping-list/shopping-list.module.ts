@@ -1,3 +1,4 @@
+import { ModalComponent } from './../shared/modal/modal.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
